@@ -1,9 +1,10 @@
 import { useState } from "react";
-
+import Todo from "./Todo";
+import { localStorage } from "./hooks/useLocalStorage";
 function Comp() {
   // 과제1-1: 7-1, 7-2강을 듣고 이곳에 투두리스트 컴포넌트를 작성해주세요.
   const [todo,setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = localStorage("todos",[]);
 
   const onChange =(e)=> setTodo(e.target.value);
   const onSubmit=(e)=>{
@@ -34,7 +35,7 @@ function Comp() {
       </form>
       <hr/>
       {todos.map((item, index)=>
-        <li key={index}>{item}</li>)
+        <Todo key={index}  item={item} index={index} todos={todos} setTodos={setTodos}/>)
       }
     </div>
   );
